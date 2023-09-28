@@ -9,9 +9,9 @@ One idea was the use the Spotify API to get all the songs out of a specific play
 The other idea was to simply use a list of various popular songs curated by us.
 
 Other features we were thinking of adding:
-    - Difficulty settings that would change how many lyrics are shown for each song
-    - Guessing the artist in addition to the song name
-    - Sorting by song genre
+* Difficulty settings that would change how many lyrics are shown for each song
+* Guessing the artist in addition to the song name
+* Sorting by song genre
 
 Lyric API:
 https://docs.ksoft.si/api/lyrics-api
