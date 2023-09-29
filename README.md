@@ -5,8 +5,9 @@ Our application would use an API to fetch song lyrics out of a list of songs, an
 which song those lyrics belongs to.
 
 We are currently considering two methods for deciding which songs would be in the quiz.
-One idea was the use the Spotify API to get all the songs out of a specific playlist, which could be changed by the user.
-The other idea was to simply use a list of various popular songs curated by us.
+One idea was the use the Spotify API, which accesses the user's Spotify account to get all the songs out of a specific 
+playlist that the user has created. 
+The other idea was to simply use a list of various popular songs curated either by us, or through a database.
 
 Other features we were thinking of adding:
 * Difficulty settings that would change how many lyrics are shown for each song
