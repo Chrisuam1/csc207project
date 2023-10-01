@@ -21,7 +21,7 @@ Spotify API:
 https://developer.spotify.com/documentation/web-api
 
 Screenshot of Calling the API:
-https://drive.google.com/file/d/1J0cklpVwZwQIWW5X2ObfwVbTzrFCOs5L/view?usp=sharing
+
 
 Example Output of Running the Java Code:
 
