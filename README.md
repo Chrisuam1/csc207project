@@ -15,7 +15,17 @@ Other features we were thinking of adding:
 * Sorting by song genre
 
 Lyric API:
-https://docs.ksoft.si/api/lyrics-api
+https://lyricsovh.docs.apiary.io/#
 
 Spotify API:
 https://developer.spotify.com/documentation/web-api
+
+Screenshot of Calling the API:
+https://drive.google.com/file/d/1J0cklpVwZwQIWW5X2ObfwVbTzrFCOs5L/view?usp=sharing
+
+Example Output of Running the Java Code:
+
+
+Technical Issues: 
+ * The Spotify API is written in JavaScript
+ * Lyric API is far too simple; only had 1 get method
