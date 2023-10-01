@@ -21,7 +21,7 @@ Spotify API:
 https://developer.spotify.com/documentation/web-api
 
 Screenshot of Calling the API:
-
+<img width="701" alt="api call test" src="https://github.com/amelia1248/csc207project/assets/128756325/becfed31-878d-41d4-bf52-92b395e5f271">
 
 Example Output of Running the Java Code:
 
