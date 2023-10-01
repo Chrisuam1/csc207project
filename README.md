@@ -25,6 +25,9 @@ Screenshot of Calling the API:
 
 Example Output of Running the Java Code:
 
+    {
+    "error": "No lyrics found"
+    }
 
 Technical Issues: 
  * The Spotify API is written in JavaScript
