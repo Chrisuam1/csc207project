@@ -1,11 +1,16 @@
 package api.src.api;
 
-public class ApiHandlerUser implements ApiHandler {
+import se.michaelthelin.spotify.SpotifyApi;
+import se.michaelthelin.spotify.model_objects.credentials.ClientCredentials;
+
+public class ApiHandlerClient implements ApiHandler {
     private String clientID;
     private String clientSecret;
+    private SpotifyApi API;
+    private ClientCredentials credentials;
     private boolean isAuthenticated = false;
 
-    public ApiHandlerUser(String id, String secret) {
+    public ApiHandlerClient(String id, String secret) {
         this.clientID = id;
         this.clientSecret = secret;
     }
