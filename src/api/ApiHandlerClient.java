@@ -17,7 +17,24 @@ public class ApiHandlerClient implements ApiHandler {
 
     @Override
     public void authenticate() {
-
+        try {
+            credentials = new SpotifyApi.Builder()
+                    .setClientId(clientID)
+                    .setClientSecret(clientSecret)
+                    .build()
+                    .clientCredentials()
+                    .build()
+                    .execute();
+        } catch(Exception e) {
+            System.out.println("Exception: " + e.getMessage());
+            return;
+        }
+        API = new SpotifyApi.Builder()
+                .setClientId(clientID)
+                .setClientSecret(clientSecret)
+                .setAccessToken(credentials.getAccessToken())
+                .build();
+        isAuthenticated = true;
     }
 
     /*// Getters and Setters //*/
