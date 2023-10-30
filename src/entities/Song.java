@@ -34,6 +34,4 @@ public class Song {
     public Integer getYearReleased() {return yearReleased; }
 
     public Album getAlbum() {return album; }
-
-
 }
