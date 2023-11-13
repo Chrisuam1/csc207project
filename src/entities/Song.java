@@ -1,37 +1,29 @@
 package api.src.entities;
 
 public class Song {
+    private final int id;
+    private String title;
+    private String artist;
+    private double popularity;
+    private double danceability;
+    private int yearReleased;
+    private Album album;
 
-    private final String title;
-
-    private final String artist;
-
-    private final Integer popularity;
-
-    private final Integer danceability;
-
-    private final Integer yearReleased;
-
-    private final Album album;
-
-    Song(String title, String artist, Integer popularity, Integer danceability, Integer yearReleased, Album album) {
-        this.title = title;
-        this.artist = artist;
-        this.popularity = popularity;
-        this.danceability = danceability;
-        this.yearReleased = yearReleased;
-        this.album = album;
+    public Song(int id) {
+        this.id = id;
     }
 
+    public int getID() {return id;}
     public String getTitle() {return title; }
+    public void setTitle(String title) {this.title = title;}
 
     public String getArtist() {return artist; }
 
-    public Integer getPopularity() {return popularity; }
+    public double getPopularity() {return popularity; }
 
-    public Integer getDanceability() {return danceability; }
+    public double getDanceability() {return danceability; }
 
-    public Integer getYearReleased() {return yearReleased; }
+    public int getYearReleased() {return yearReleased; }
 
     public Album getAlbum() {return album; }
 }
