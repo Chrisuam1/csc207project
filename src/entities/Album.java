@@ -1,2 +1,4 @@
-package api.src.entities;public class Album {
+package api.src.entities;
+
+public class Album {
 }

@@ -1,2 +1,5 @@
-package api.src.entities;public class Song {
+package api.src.entities;
+
+public class Song {
+
 }
