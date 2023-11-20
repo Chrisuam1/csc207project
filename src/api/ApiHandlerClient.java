@@ -2,6 +2,8 @@ package api.src.api;
 
 import se.michaelthelin.spotify.SpotifyApi;
 import se.michaelthelin.spotify.model_objects.credentials.ClientCredentials;
+import se.michaelthelin.spotify.model_objects.specification.AudioFeatures;
+import se.michaelthelin.spotify.model_objects.specification.Track;
 
 public class ApiHandlerClient implements ApiHandler {
     private String clientID;
@@ -13,6 +15,26 @@ public class ApiHandlerClient implements ApiHandler {
     public ApiHandlerClient(String id, String secret) {
         this.clientID = id;
         this.clientSecret = secret;
+    }
+
+    public Track makeTrackRequest(String id) {
+        try {
+            assert checkIsAuthenticated();
+            return API.getTrack(id).build().execute();
+        } catch (Exception e) {
+            System.out.println("Exception: " + e.getMessage());
+        }
+        return null;
+    }
+
+    public AudioFeatures makeAudioFeaturesRequest(String id) {
+        try {
+            assert checkIsAuthenticated();
+            return API.getAudioFeaturesForTrack(id).build().execute();
+        } catch (Exception e) {
+            System.out.println("Exception: " + e.getMessage());
+        }
+        return null;
     }
 
     @Override
