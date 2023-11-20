@@ -1,29 +1,36 @@
 package api.src.entities;
 
+import se.michaelthelin.spotify.model_objects.specification.ArtistSimplified;
+
 public class Song {
-    private final int id;
+    private final String id;
     private String title;
-    private String artist;
+    private ArtistSimplified[] artists;
     private double popularity;
     private double danceability;
-    private int yearReleased;
+    private String yearReleased;
     private Album album;
 
-    public Song(int id) {
+    public Song(String id) {
         this.id = id;
     }
 
-    public int getID() {return id;}
+    public String getID() {return id;}
     public String getTitle() {return title; }
     public void setTitle(String title) {this.title = title;}
 
-    public String getArtist() {return artist; }
+    public ArtistSimplified[] getArtists() {return artists;}
+    public void setArtists(ArtistSimplified[] artists) {this.artists = artists;}
 
     public double getPopularity() {return popularity; }
+    public void setPopularity(double popularity) {this.popularity = popularity;}
 
     public double getDanceability() {return danceability; }
+    public void setDanceability(double danceability) {this.danceability = danceability;}
 
-    public int getYearReleased() {return yearReleased; }
+    public String getYearReleased() {return yearReleased; }
+    public void setYearReleased(String yearReleased) {this.yearReleased = yearReleased;}
 
     public Album getAlbum() {return album; }
+    public void setAlbum(Album album) {this.album = album;}
 }
