@@ -24,7 +24,8 @@ public class Quiz {
     public void generateQuestions(Question question) {
         int i = 0;
         while (i <= numQuestions) {
-            question.setQuestion();
+            // TODO: implement setQuestion
+            //question.setQuestion();
             i++;
         }
     }
