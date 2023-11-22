@@ -1,2 +1,3 @@
-package api.src.entities;public class Player {
+package api.src.entities;
+public class Player {
 }

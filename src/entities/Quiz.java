@@ -1,2 +1,5 @@
-package api.src.entities;public class Quiz {
+package api.src.entities;
+
+public class Quiz {
+
 }
