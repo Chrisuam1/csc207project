@@ -1,6 +1,7 @@
 package api.src.entities;
 
 import api.src.api.ApiHandlerClient;
+import se.michaelthelin.spotify.model_objects.specification.ArtistSimplified;
 import se.michaelthelin.spotify.model_objects.specification.AudioFeatures;
 import se.michaelthelin.spotify.model_objects.specification.Track;
 
@@ -16,9 +17,14 @@ public class SpotifyApiSongFactory implements SongFactory {
         AudioFeatures a = api.makeAudioFeaturesRequest(song.getID());
 
         song.setTitle(t.getName());
-        song.setArtists(t.getArtists());
         song.setPopularity(t.getPopularity());
         song.setDanceability(a.getDanceability());
-        // song.setYearReleased(); needs album implementation
+        song.setAlbum(
+                new Album(t.getAlbum().getId(), new SpotifyApiAlbumFactory(api)));
+        song.setYearReleased(song.getAlbum().getYearReleased());
+
+        for (ArtistSimplified i : t.getArtists()) {
+            song.getArtists().add(i.getName());
+        }
     }
 }

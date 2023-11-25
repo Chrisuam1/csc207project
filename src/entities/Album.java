@@ -1,30 +1,30 @@
 package api.src.entities;
+
+import se.michaelthelin.spotify.model_objects.specification.ArtistSimplified;
+import se.michaelthelin.spotify.model_objects.specification.Image;
+
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+
 public class Album {
+    private final String id;
+    private String title;
+    private ArrayList<Song> songs;
+    private ArrayList<String> artists;
+    private ArrayList<BufferedImage> coverImages;
+    private String yearReleased;
 
-    private final String title;
-    private final Song[] songs;
-
-    private final String artist;
-
-    private final String cover;
-
-    private final Integer yearReleased;
-
-    Album(String title, Song[] songs, String artist, String cover, Integer yearReleased) {
-        this.title = title;
-        this.songs = songs;
-        this.artist = artist;
-        this.cover = cover;
-        this.yearReleased = yearReleased;
+    Album(String id, AlbumFactory factory) {
+        this.id = id;
+        factory.create(this);
     }
 
-    public String getTitle() {return title; }
-
-    public Song[] getSongs() {return songs; }
-
-    public String getArtist() {return artist; }
-
-    public String getCover() {return cover; }
-
-    public Integer getYearReleased() {return yearReleased; }
+    public String getId() {return id;}
+    public String getTitle() {return title;}
+    public void setTitle(String title) {this.title = title;}
+    public ArrayList<Song> getSongs() {return songs;}
+    public ArrayList<String> getArtists() {return artists;}
+    public ArrayList<BufferedImage> getCoverImages() {return coverImages;}
+    public String getYearReleased() {return yearReleased;}
+    public void setYearReleased(String year) {this.yearReleased = year;}
 }
