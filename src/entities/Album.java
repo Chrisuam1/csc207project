@@ -14,9 +14,8 @@ public class Album {
     private ArrayList<BufferedImage> coverImages;
     private String yearReleased;
 
-    Album(String id, AlbumFactory factory) {
+    Album(String id) {
         this.id = id;
-        factory.create(this);
     }
 
     public String getId() {return id;}

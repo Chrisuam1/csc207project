@@ -21,7 +21,7 @@ public class SpotifyApiSongFactory implements SongFactory {
         song.setPopularity(t.getPopularity());
         song.setDanceability(a.getDanceability());
         song.setAlbum(
-                new Album(t.getAlbum().getId(), new SpotifyApiAlbumFactory(api)));
+                new SpotifyApiAlbumFactory(api).create(t.getAlbum().getId()));
         song.setYearReleased(song.getAlbum().getYearReleased());
 
         for (ArtistSimplified i : t.getArtists()) {

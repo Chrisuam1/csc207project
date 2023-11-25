@@ -15,7 +15,8 @@ public class SpotifyApiAlbumFactory implements AlbumFactory {
 
     public SpotifyApiAlbumFactory(ApiHandlerClient api) {this.api = api;}
     @Override
-    public void create(Album album) {
+    public Album create(String id) {
+        Album album = new Album(id);
         se.michaelthelin.spotify.model_objects.specification.Album spotifyAlbum =
                 api.makeAlbumRequest(album.getId());
 
@@ -42,5 +43,6 @@ public class SpotifyApiAlbumFactory implements AlbumFactory {
                     new SpotifyApiSongFactory(api).create(i.getId())
             ); // Iterate through all the TrackSimplified-s and create Song objects
         }
+        return album;
     }
 }
