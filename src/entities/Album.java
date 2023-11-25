@@ -14,7 +14,7 @@ public class Album {
     private ArrayList<BufferedImage> coverImages;
     private String yearReleased;
 
-    Album(String id) {
+    public Album(String id) {
         this.id = id;
     }
 

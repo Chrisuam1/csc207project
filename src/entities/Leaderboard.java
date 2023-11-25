@@ -21,5 +21,6 @@ public class Leaderboard {
             }
 
         }
+        return 0;
     }
 }
