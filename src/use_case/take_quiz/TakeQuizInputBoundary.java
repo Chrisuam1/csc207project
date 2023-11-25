@@ -1,4 +1,6 @@
 package src.use_case.take_quiz;
 
-public class TakeQuizInputBoundary {
+public interface TakeQuizInputBoundary {
+
+    void execute(TakeQuizInputData takeQuizInputData);
 }

@@ -17,7 +17,7 @@ public class Leaderboard {
         }
         for (Player p : this.players) {
             if (p.equals(player)) {
-                return player.getScore();
+                //return player.getScore();
             }
 
         }

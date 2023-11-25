@@ -15,5 +15,4 @@ public class Player {
     public void setScore(int point) {
         this.score = score + point;
     }
-
 }
