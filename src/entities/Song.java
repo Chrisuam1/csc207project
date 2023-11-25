@@ -1,4 +1,4 @@
-package api.src.entities;
+package src.entities;
 
 import java.util.ArrayList;
 

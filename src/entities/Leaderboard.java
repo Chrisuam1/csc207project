@@ -1,4 +1,5 @@
-package api.src.entities;public class Leaderboard {
+package src.entities;
+public class Leaderboard {
     private Player[] players;
 
     public void setPlayers(Player[] players) {

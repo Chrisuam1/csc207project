@@ -1,4 +1,4 @@
-package api.src.api;
+package src.api;
 
 import se.michaelthelin.spotify.SpotifyApi;
 import se.michaelthelin.spotify.model_objects.credentials.ClientCredentials;
