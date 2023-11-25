@@ -1,5 +1,5 @@
 package api.src.entities;
 
 public interface SongFactory {
-    void create(Song song);
+    Song create(String id);
 }
