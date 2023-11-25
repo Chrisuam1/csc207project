@@ -1,2 +1,4 @@
-package api.src.entities;public class Question {
+package api.src.entities;
+
+public class Question {
 }
