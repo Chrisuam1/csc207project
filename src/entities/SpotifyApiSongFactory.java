@@ -12,7 +12,8 @@ public class SpotifyApiSongFactory implements SongFactory {
         this.api = api;
     }
     @Override
-    public void create(Song song) {
+    public Song create(String id) {
+        Song song = new Song(id);
         Track t = api.makeTrackRequest(song.getID());
         AudioFeatures a = api.makeAudioFeaturesRequest(song.getID());
 
@@ -26,5 +27,6 @@ public class SpotifyApiSongFactory implements SongFactory {
         for (ArtistSimplified i : t.getArtists()) {
             song.getArtists().add(i.getName());
         }
+        return song;
     }
 }

@@ -39,7 +39,7 @@ public class SpotifyApiAlbumFactory implements AlbumFactory {
         Paging<TrackSimplified> tracks = spotifyAlbum.getTracks();
         for (TrackSimplified i : tracks.getItems()) {
             album.getSongs().add(
-                    new Song(i.getId(), new SpotifyApiSongFactory(api))
+                    new SpotifyApiSongFactory(api).create(i.getId())
             ); // Iterate through all the TrackSimplified-s and create Song objects
         }
     }

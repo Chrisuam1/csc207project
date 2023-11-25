@@ -11,9 +11,8 @@ public class Song {
     private String yearReleased;
     private Album album;
 
-    public Song(String id, SongFactory factory) {
+    public Song(String id) {
         this.id = id;
-        factory.create(this);
     }
 
     public String getID() {return id;}
