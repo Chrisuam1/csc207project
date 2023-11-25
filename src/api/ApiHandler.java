@@ -1,4 +1,4 @@
-package api.src.api;
+package src.api;
 public interface ApiHandler {
     String getClientID();
     void setClientID(String id);

@@ -1,4 +1,4 @@
-package api.src.interface_adapter;
+package src.interface_adapter;
 
 public class QuizViewModel {
 }

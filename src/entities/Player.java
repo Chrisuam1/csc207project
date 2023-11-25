@@ -1,4 +1,4 @@
-package api.src.entities;
+package src.entities;
 public class Player {
 
     private String name;

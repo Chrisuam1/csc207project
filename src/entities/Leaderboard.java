@@ -1,4 +1,5 @@
-package api.src.entities;public class Leaderboard {
+package src.entities;
+public class Leaderboard {
     private Player[] players;
 
     public void setPlayers(Player[] players) {
@@ -20,7 +21,6 @@ package api.src.entities;public class Leaderboard {
             }
 
         }
-        // TODO: placeholder
         return 0;
     }
 }
