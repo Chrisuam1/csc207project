@@ -16,7 +16,7 @@ public class Question {
 
     // NOTE: FINISH IMPLEMENTATION(AMELIA)
     public void setQuestion(){
-        ...
+        //...
         // Generate question in form of String using 2 Songs in this.songs, call Song.title
     }
 
@@ -37,11 +37,11 @@ public class Question {
     }
 
     public Song getSong2(){
-        ...
+        return null;
     }
 
     public void setSong2(){
-        ...
+        //...
     }
     public int getPointsAwarded(){
         return this.pointsAwarded;
