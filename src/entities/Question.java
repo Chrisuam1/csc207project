@@ -1,8 +1,7 @@
 package src.entities;
 
 public class Question {
-    public String question;
-    public String answer;
+    public Song answer;
 
     public Song song1;
 
@@ -10,21 +9,16 @@ public class Question {
 
     public int pointsAwarded;
 
-    public String getQuestion(){
-        return this.question;
-    }
-
-    // NOTE: FINISH IMPLEMENTATION(AMELIA)
-    public void setQuestion(){
-        ...
-        // Generate question in form of String using 2 Songs in this.songs, call Song.title
-    }
-
-    public String getAnswer(){
+    public Song getAnswer(){
         return this.answer;
     }
     public void setAnswer(){
-        // Retrieve song in this.songs that has the highest Song.popularity attribute
+        if (this.song1.getPopularity() > this.song2.getPopularity()){
+            this.answer = song1;
+        }
+        else{
+            this.answer = song2;
+        }
     }
 
     public Song getSong1(){
