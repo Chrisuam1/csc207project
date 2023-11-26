@@ -2,6 +2,7 @@ package src.data_access;
 import src.entities.Song;
 import src.entities.factories.SongFactory;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import java.util.Random;
@@ -17,7 +18,7 @@ public class QuizDataAccessObject {
 
     public QuizDataAccessObject(SongFactory factory) {this.factory = factory;}
 
-    public void readCSV(String[] args) throws Exception {
+    public void readCSV() throws IOException {
 
         // Creating an ArrayList to store id's
         ArrayList<Song> songList = new ArrayList<Song>();
