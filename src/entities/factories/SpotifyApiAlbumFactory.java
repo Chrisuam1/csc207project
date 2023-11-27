@@ -44,6 +44,7 @@ public class SpotifyApiAlbumFactory implements AlbumFactory {
             artists.add(i.getName());
         }
 
+        // get cover images for the album
         ArrayList<BufferedImage> coverImages = new ArrayList<>();
         Image[] images = spotifyAlbum.getImages();
         for (Image i : images) {
