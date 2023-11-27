@@ -4,20 +4,26 @@ import java.util.ArrayList;
 public class Quiz {
     private ArrayList<Question> questions;
     private int numQuestions;
+    private double totalPoints;
 
     public Quiz() {
         questions = new ArrayList<>();
         numQuestions = 0;
+        totalPoints = 0.0;
     }
 
     public void addQuestion(Question question) {
         questions.add(question);
         numQuestions += 1;
+        totalPoints += question.getPointsAwarded();
     }
 
     public void addQuestionList(ArrayList<Question> questionList) {
         questions.addAll(questionList);
         numQuestions += questionList.size();
+        for (Question q : questionList) {
+            totalPoints += q.getPointsAwarded();
+        }
     }
 
     public ArrayList<Question> getQuestions() {
@@ -26,5 +32,9 @@ public class Quiz {
 
     public int getNumQuestions() {
         return numQuestions;
+    }
+
+    public double getTotalPoints() {
+        return totalPoints;
     }
 }
