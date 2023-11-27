@@ -1,12 +1,14 @@
 package entities.factories;
 
-import api.ApiHandlerClient;
 import se.michaelthelin.spotify.model_objects.specification.ArtistSimplified;
 import se.michaelthelin.spotify.model_objects.specification.AudioFeatures;
 import se.michaelthelin.spotify.model_objects.specification.Track;
+import api.ApiHandlerClient;
 import entities.Song;
-import entities.factories.SongFactory;
-import entities.factories.SpotifyApiAlbumFactory;
+import entities.Album;
+import java.util.ArrayList;
+
+
 
 public class SpotifyApiSongFactory implements SongFactory {
     ApiHandlerClient api;
@@ -16,20 +18,22 @@ public class SpotifyApiSongFactory implements SongFactory {
     }
     @Override
     public Song create(String id) {
-        Song song = new Song(id);
-        Track t = api.makeTrackRequest(song.getID());
-        AudioFeatures a = api.makeAudioFeaturesRequest(song.getID());
+        //Song song = new Song(id);
+        Track t = api.makeTrackRequest(id);
+        AudioFeatures a = api.makeAudioFeaturesRequest(id);
 
-        song.setTitle(t.getName());
-        song.setPopularity(t.getPopularity());
-        song.setDanceability(a.getDanceability());
-        song.setAlbum(
-                new SpotifyApiAlbumFactory(api).create(t.getAlbum().getId()));
-        song.setYearReleased(song.getAlbum().getYearReleased());
+        String name = t.getName();
+        double popularity = t.getPopularity();
+        double danceability = a.getDanceability();
+        Album album = new SpotifyApiAlbumFactory(api).create(t.getAlbum().getId());
+        String yearReleased = album.getYearReleased();
 
+        // get all the artists for the track
+        ArrayList<String> artists = new ArrayList<>();
         for (ArtistSimplified i : t.getArtists()) {
-            song.getArtists().add(i.getName());
+            artists.add(i.getName());
         }
-        return song;
+
+        return new Song (id, name, artists, popularity, danceability, album, yearReleased);
     }
 }
