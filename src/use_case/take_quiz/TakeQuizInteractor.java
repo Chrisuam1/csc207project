@@ -1,5 +1,5 @@
-package src.use_case.take_quiz;
-import src.entities.Song;
+package use_case.take_quiz;
+import entities.Song;
 
 import java.io.*;
 import java.util.ArrayList;

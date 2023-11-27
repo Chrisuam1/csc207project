@@ -1,7 +1,7 @@
-package src.use_case.take_quiz;
+package use_case.take_quiz;
 
-import src.entities.Player;
-import src.entities.Quiz;
+import entities.Player;
+import entities.Quiz;
 
 public class TakeQuizInputData {
     final private Player player;

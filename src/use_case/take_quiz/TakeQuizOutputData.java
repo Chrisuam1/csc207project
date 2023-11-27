@@ -1,4 +1,4 @@
-package src.use_case.take_quiz;
+package use_case.take_quiz;
 
 public class TakeQuizOutputData {
     final private int score;

@@ -1,11 +1,11 @@
-package src.entities.factories;
+package entities.factories;
 
-import src.api.ApiHandlerClient;
+import api.ApiHandlerClient;
 import se.michaelthelin.spotify.model_objects.specification.ArtistSimplified;
 import se.michaelthelin.spotify.model_objects.specification.Image;
 import se.michaelthelin.spotify.model_objects.specification.Paging;
 import se.michaelthelin.spotify.model_objects.specification.TrackSimplified;
-import src.entities.Album;
+import entities.Album;
 
 import javax.imageio.ImageIO;
 import java.io.IOException;

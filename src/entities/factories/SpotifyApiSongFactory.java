@@ -1,12 +1,12 @@
-package src.entities.factories;
+package entities.factories;
 
-import src.api.ApiHandlerClient;
+import api.ApiHandlerClient;
 import se.michaelthelin.spotify.model_objects.specification.ArtistSimplified;
 import se.michaelthelin.spotify.model_objects.specification.AudioFeatures;
 import se.michaelthelin.spotify.model_objects.specification.Track;
-import src.entities.Song;
-import src.entities.factories.SongFactory;
-import src.entities.factories.SpotifyApiAlbumFactory;
+import entities.Song;
+import entities.factories.SongFactory;
+import entities.factories.SpotifyApiAlbumFactory;
 
 public class SpotifyApiSongFactory implements SongFactory {
     ApiHandlerClient api;

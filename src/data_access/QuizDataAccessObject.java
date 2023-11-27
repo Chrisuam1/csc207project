@@ -1,6 +1,6 @@
-package src.data_access;
-import src.entities.Song;
-import src.entities.factories.SongFactory;
+package data_access;
+import entities.Song;
+import entities.factories.SongFactory;
 
 import java.util.ArrayList;
 
