@@ -1,55 +1,59 @@
 package entities;
 
+/**
+ * A question that asks which of two songs is more popular (as determined by spotify).
+ * Awards more points if the two songs have similar popularity scores.
+ */
+
 public class Question {
-    public String question;
-    public String answer;
 
-    public Song song1;
+    private final Song answer;
+    private final Song song1;
+    private final Song song2;
+    private final double pointsAwarded;
 
-    public Song song2;
-
-    public int pointsAwarded;
-
-    public String getQuestion(){
-        return this.question;
+    /**
+     * Creates a question based on two songs' popularity
+     * Precondition: song1.popularity != song2.popularity
+     * @param song1
+     * @param song2
+     */
+    public Question(Song song1, Song song2) {
+        this.song1 = song1;
+        this.song2 = song2;
+        pointsAwarded = calculatePointsAwarded();
+        answer = calculateAnswer();
     }
 
-    // NOTE: FINISH IMPLEMENTATION(AMELIA)
-    public void setQuestion(){
-        //...
-        // Generate question in form of String using 2 Songs in this.songs, call Song.title
-    }
-
-    public String getAnswer(){
+    public Song getAnswer(){
         return this.answer;
-    }
-    public void setAnswer(){
-        // Retrieve song in this.songs that has the highest Song.popularity attribute
     }
 
     public Song getSong1(){
         return this.song1;
     }
 
-    public void setSong1(){
-        // Randomly select 2 songs... maybe change Song implementation so that Songs are generated randomly???
-        // Maybe choose 2 songs with a popularity rating similar to each other/within certain range
-    }
-
     public Song getSong2(){
         return null;
     }
 
-    public void setSong2(){
-        //...
-    }
-    public int getPointsAwarded(){
+    public double getPointsAwarded(){
         return this.pointsAwarded;
     }
-    // NOTE: FINISH IMPLEMENTATION(AMELIA)
-    public void setPointsAwarded(){
-        // Set points by difficulty; take difference in Song.popularity and multiply to get points
-        int points = 0;
-        this.pointsAwarded = points;
+
+    // helper method that determines how many points are awarded
+    private double calculatePointsAwarded() {
+        return ((1 /
+                Math.abs(
+                        (this.song1.getPopularity() - this.song2.getPopularity())
+                )) * 1000);
+    }
+
+    // helper method that determines the answer
+    private Song calculateAnswer() {
+        if (song1.getPopularity() > song2.getPopularity()) {
+            return song1;
+        }
+        else return song2;
     }
 }
