@@ -4,6 +4,8 @@ import src.entities.Quiz;
 import src.entities.Song;
 import src.entities.factories.SongFactory;
 import src.data_access.QuizDataAccessObject; // OR CHANGE TO THE DAO INTERFACE!
+import src.entities.factories.SpotifyApiSongFactory;
+import src.api.ApiHandlerClient;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -17,41 +19,10 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-public class TakeQuizInteractor{
+public class TakeQuizInteractor {
 
-    // STEP 1: Create a SongFactory object to use in DAO
-    // IMPORTANT NOTE: FIX THIS!!
-    SongFactory songFactory = new SongFactory(); // FIX!!!
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    // STEP 2: Use DAO to create Masterlist of Songs from DAO
-    QuizDataAccessObject quizDao = new QuizDataAccessObject(songFactory);
-
-    // IMPORTANT NOTE: below code "try/catch", etc. is to handle the case where Quiz.readcsv throws an exception
-    {
-        try {
-            quizDao.readCSV();  // Setting quizDao.songlist attribute to be the masterlist
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }// Setting quiz's songlist attribute using csv
-    ArrayList<Song> masterlist = quizDao.getSongList();
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    // STEP 3: Create Quiz Object
-    Quiz quiz = new Quiz();
-    // IMPORTANT NOTE: Below quiz.setNumQuestions method doesn't work unless...
-    // you put {} around it, it's because it returns void.
-    // Find a way to set limit of input to be <= 50.
-    {quiz.setNumQuestions(50);}
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    // STEP 4: Helper method for GENERATING 2 RANDOM SONGS FROM MASTERLIST
-    public ArrayList<Song> generate2RandomSongs(){
-       // Creating a Random object
+    public ArrayList<Song> generate2RandomSongs(ArrayList<Song> masterlist) {
+        // Creating a Random object
         Random rand = new Random();
 
         // Creating an empty ArrayList to store 2 random songs
@@ -66,42 +37,71 @@ public class TakeQuizInteractor{
         Song ranSong2 = masterlist.get(ranIndex2);
 
         // If indexes are equal OR songs have same popularity, we choose a new random index/song
-        while((ranIndex1 == ranIndex2) || (ranSong1.getPopularity() == ranSong2.getPopularity())){
+        while ((ranIndex1 == ranIndex2) || (ranSong1.getPopularity() == ranSong2.getPopularity())) {
             ranIndex2 = rand.nextInt(masterlist.size());
-            }
+        }
 
         Song finalRanSong2 = masterlist.get(ranIndex2);
 
         // Storing both songs in empty ArrayList
         finalSongs.add(ranSong1);
         finalSongs.add(finalRanSong2);
-    return finalSongs;
+        return finalSongs;
     }
+    public void execute() {
+        // STEP 0: Creating an ApiHandlerClient object to use to make SongFactory
+        ApiHandlerClient apiHandlerClient = new ApiHandlerClient("994142c178534fd69a48aad3e8fd54ba",
+                "1854b844f8634b759a5b0ed4918cb016");
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // STEP 1: Create a SongFactory object to use to make DAO
+        // IMPORTANT NOTE: FIX THIS!!
+        SpotifyApiSongFactory songFactory = new SpotifyApiSongFactory(apiHandlerClient); // FIX!!!
 
-    // STEP 5: Generate all questions and store in Quiz.questions attribute
-    public void generateAllQuestions(){
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        // STEP 2: Use DAO to create masterlist of Songs from DAO
+        QuizDataAccessObject quizDao = new QuizDataAccessObject(songFactory);
+
+        // IMPORTANT NOTE: below code "try/catch", etc. is to handle the case where Quiz.readcsv throws an exception
+            try {
+                quizDao.readCSV();  // Setting quizDao.songlist attribute to be the masterlist
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+        }// Setting quiz's songlist attribute using csv
+        ArrayList<Song> masterlist = quizDao.getSongList();
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        // STEP 3: Create Quiz Object
+        Quiz quiz = new Quiz(50); // PLACEHOLDER INT FOR NOW
+        // IMPORTANT NOTE: Below quiz.setNumQuestions method doesn't work unless...
+        // you put {} around it, it's because it returns void.
+        // Find a way to set limit of input to be <= 50.
+
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        // STEP 4: Helper method for GENERATING 2 RANDOM SONGS FROM MASTERLIST
+        // See above method
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        // STEP 5: Generate all questions and store in Quiz.questions attribute
         int i = 0;
         ArrayList<Question> questionList = new ArrayList<Question>();
         // Loop through as many times as num_questions
-        while (i <= quiz.getNumQuestions()) {
-            // Create a Question object
-            Question question = new Question();
-            // Generating 2 random songs and setting those as Question.song1 and Question.song2 attributes
-            question.setSongs(this.generate2RandomSongs());
-            // Setting Question attributes Question.pointsAwarded and Question.answer
-            question.setAnswer();
-            question.setPointsAwarded();
-            // Adding Question object to ArrayList
-            questionList.add(question);
-            i++;
+            while (i <= quiz.getNumQuestions()) {
+                // Create a Question object, answer, pointsAwarded, and song1 and song2 are set
+                Question question = new Question(this.generate2RandomSongs(masterlist));
+                // Adding Question object to ArrayList
+                questionList.add(question);
+                i++;
+            }
+            // Storing list of ALL QUESTIONS in Quiz object
+            quiz.setQuestions(questionList);
         }
-        // Storing list of ALL QUESTIONS in Quiz object
-        quiz.setQuestions(questionList);
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        // STEP 6: CONTINUE...
     }
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    // STEP 6: CONTINUE...
-}

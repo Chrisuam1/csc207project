@@ -13,22 +13,22 @@ public class Question {
 
     public double pointsAwarded;
 
-    public Song getAnswer() {
-        return this.answer;
-    }
-
-    public void setAnswer() {
+    public Question(ArrayList<Song> songList){
+        // Setting song1 and song2 attributes
+        this.song1 = songList.get(0);
+        this.song2 = songList.get(1);
+        // Setting answer attribute
         if (this.song1.getPopularity() > this.song2.getPopularity()) {
             this.answer = song1;
         } else {
             this.answer = song2;
         }
+        // Setting pointsAwarded attribute
+        this.pointsAwarded = (1 / (this.song1.getPopularity() - this.song2.getPopularity())) * 1000;
     }
 
-    // IMPORTANT: SETTER SETS BOTH SONG1 & SONG1 AT ONCE!!!
-    public void setSongs(ArrayList<Song> songlist) {
-        this.song1 = songlist.get(0);
-        this.song2 = songlist.get(1);
+    public Song getAnswer() {
+        return this.answer;
     }
 
     public Song getSong1() {
@@ -41,9 +41,5 @@ public class Question {
 
     public double getPointsAwarded() {
         return this.pointsAwarded;
-    }
-
-    public void setPointsAwarded() {
-        this.pointsAwarded = (1 / (this.song1.getPopularity() - this.song2.getPopularity())) * 1000;
     }
 }
