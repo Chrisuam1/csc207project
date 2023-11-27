@@ -2,6 +2,10 @@ package entities;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a song from Spotify's database
+ */
+
 public class Song {
     private final String id;
     private final String title;
