@@ -1,5 +1,9 @@
 package src.entities;
 
+import java.util.ArrayList;
+
+import java.lang.Math;
+
 public class Question {
     public Song answer;
 
@@ -7,43 +11,35 @@ public class Question {
 
     public Song song2;
 
-    public int pointsAwarded;
+    public double pointsAwarded;
 
-    public Song getAnswer(){
-        return this.answer;
-    }
-    public void setAnswer(){
-        if (this.song1.getPopularity() > this.song2.getPopularity()){
+    public Question(ArrayList<Song> songList){
+        // Setting song1 and song2 attributes
+        this.song1 = songList.get(0);
+        this.song2 = songList.get(1);
+        // Setting answer attribute
+        if (this.song1.getPopularity() > this.song2.getPopularity()) {
             this.answer = song1;
-        }
-        else{
+        } else {
             this.answer = song2;
         }
+        // Setting pointsAwarded attribute
+        this.pointsAwarded = (1 / (this.song1.getPopularity() - this.song2.getPopularity())) * 1000;
     }
 
-    public Song getSong1(){
+    public Song getAnswer() {
+        return this.answer;
+    }
+
+    public Song getSong1() {
         return this.song1;
     }
 
-    public void setSong1(){
-        // Randomly select 2 songs... maybe change Song implementation so that Songs are generated randomly???
-        // Maybe choose 2 songs with a popularity rating similar to each other/within certain range
+    public Song getSong2() {
+        return this.song2;
     }
 
-    public Song getSong2(){
-        ...
-    }
-
-    public void setSong2(){
-        ...
-    }
-    public int getPointsAwarded(){
+    public double getPointsAwarded() {
         return this.pointsAwarded;
-    }
-    // NOTE: FINISH IMPLEMENTATION(AMELIA)
-    public void setPointsAwarded(){
-        // Set points by difficulty; take difference in Song.popularity and multiply to get points
-        int points = 0;
-        this.pointsAwarded = points;
     }
 }
