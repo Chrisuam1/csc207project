@@ -1,6 +1,6 @@
-package api.src.data_access;
+package src.data_access;
 
-import api.src.entities.Song;
+import src.entities.Song;
 import java.util.ArrayList;
 
 public interface TakeQuizDataAccessInterface {
