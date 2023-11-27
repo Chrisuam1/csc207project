@@ -5,5 +5,5 @@ import java.util.ArrayList;
 
 public interface TakeQuizDataAccessInterface {
 
-    ArrayList<Song> getRandomSongs(int numSongs);
+    ArrayList<Song> getRandomSongs(int numSongs) throws Exception;
 }
