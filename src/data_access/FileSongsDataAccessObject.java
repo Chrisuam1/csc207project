@@ -24,7 +24,8 @@ public class FileSongsDataAccessObject implements TakeQuizDataAccessInterface {
 
         try (BufferedReader reader = new BufferedReader(new FileReader(csvFile))) {
             String row;
-            int i = 0;
+
+            int i = 1; // TODO: debugger counter, can be deleted
             while ((row = reader.readLine()) != null) {
 
                 String id;
@@ -40,6 +41,10 @@ public class FileSongsDataAccessObject implements TakeQuizDataAccessInterface {
                 }
 
                 songList.add(songFactory.create(id));
+
+
+                // TODO: debugger line, can be deleted
+                System.out.println(Integer.toString(i++) + ". SongID: " + id + " successfully added to database");
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());

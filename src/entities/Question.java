@@ -34,7 +34,7 @@ public class Question {
     }
 
     public Song getSong2(){
-        return null;
+        return song2;
     }
 
     public double getPointsAwarded(){
