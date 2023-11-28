@@ -12,6 +12,11 @@ public class Quiz {
         totalPoints = 0.0;
     }
 
+    public Quiz(ArrayList<Question> questions) {
+        this(); // calling the default constructor
+        this.addQuestionList(questions);
+    }
+
     public void addQuestion(Question question) {
         questions.add(question);
         numQuestions += 1;
