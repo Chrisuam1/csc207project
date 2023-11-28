@@ -6,4 +6,5 @@ import java.util.ArrayList;
 public interface TakeQuizDataAccessInterface {
 
     ArrayList<Song> getRandomSongs(int numSongs) throws Exception;
+    int getNumSongs();  // get the number of songs in the database
 }

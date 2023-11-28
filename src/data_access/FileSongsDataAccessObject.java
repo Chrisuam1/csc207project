@@ -98,4 +98,9 @@ public class FileSongsDataAccessObject implements TakeQuizDataAccessInterface {
             return randomSongs;
         }
     }
+
+    @Override
+    public int getNumSongs() {
+        return songList.size();
+    }
 }
