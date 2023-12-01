@@ -1,4 +1,5 @@
-package api.src.view;
+package src.view;
 
 public class TakeQuizView {
+
 }

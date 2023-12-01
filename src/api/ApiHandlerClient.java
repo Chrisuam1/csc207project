@@ -1,7 +1,8 @@
-package api.src.api;
+package src.api;
 
 import se.michaelthelin.spotify.SpotifyApi;
 import se.michaelthelin.spotify.model_objects.credentials.ClientCredentials;
+import se.michaelthelin.spotify.model_objects.specification.Album;
 import se.michaelthelin.spotify.model_objects.specification.AudioFeatures;
 import se.michaelthelin.spotify.model_objects.specification.Track;
 
@@ -31,6 +32,16 @@ public class ApiHandlerClient implements ApiHandler {
         try {
             assert checkIsAuthenticated();
             return API.getAudioFeaturesForTrack(id).build().execute();
+        } catch (Exception e) {
+            System.out.println("Exception: " + e.getMessage());
+        }
+        return null;
+    }
+
+    public Album makeAlbumRequest(String id) {
+        try {
+            assert checkIsAuthenticated();
+            return API.getAlbum(id).build().execute();
         } catch (Exception e) {
             System.out.println("Exception: " + e.getMessage());
         }

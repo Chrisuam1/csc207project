@@ -1,4 +1,4 @@
-package api.src.entities;
+package src.entities;
 public class Player {
 
     private String name;
@@ -15,5 +15,4 @@ public class Player {
     public void setScore(int point) {
         this.score = score + point;
     }
-
 }

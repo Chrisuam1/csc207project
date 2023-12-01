@@ -1,4 +1,5 @@
-package api.src.entities;public class Leaderboard {
+package src.entities;
+public class Leaderboard {
     private Player[] players;
 
     public void setPlayers(Player[] players) {
@@ -16,9 +17,10 @@ package api.src.entities;public class Leaderboard {
         }
         for (Player p : this.players) {
             if (p.equals(player)) {
-                return player.getScore();
+                //return player.getScore();
             }
 
         }
+        return 0;
     }
 }

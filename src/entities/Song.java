@@ -1,11 +1,11 @@
-package api.src.entities;
+package src.entities;
 
-import se.michaelthelin.spotify.model_objects.specification.ArtistSimplified;
+import java.util.ArrayList;
 
 public class Song {
     private final String id;
     private String title;
-    private ArtistSimplified[] artists;
+    private ArrayList<String> artists;
     private double popularity;
     private double danceability;
     private String yearReleased;
@@ -19,8 +19,7 @@ public class Song {
     public String getTitle() {return title; }
     public void setTitle(String title) {this.title = title;}
 
-    public ArtistSimplified[] getArtists() {return artists;}
-    public void setArtists(ArtistSimplified[] artists) {this.artists = artists;}
+    public ArrayList<String> getArtists() {return artists;}
 
     public double getPopularity() {return popularity; }
     public void setPopularity(double popularity) {this.popularity = popularity;}
