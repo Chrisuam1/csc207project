@@ -49,7 +49,6 @@ public class FileSongsDataAccessObject implements TakeQuizDataAccessInterface {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-
     }
 
     public ArrayList<Song> getSongList() {
