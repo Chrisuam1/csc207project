@@ -1,5 +1,6 @@
-package src.entities;
+package entities;
 
+import entities.Album;
 import java.util.ArrayList;
 
 public class Song {

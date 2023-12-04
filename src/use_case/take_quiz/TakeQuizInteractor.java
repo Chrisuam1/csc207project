@@ -1,10 +1,10 @@
-package src.use_case.take_quiz;
-import src.entities.Question;
-import src.entities.Quiz;
-import src.entities.Song;
-import src.entities.factories.SongFactory;
-import src.data_access.QuizDataAccessObject; // OR CHANGE TO THE DAO INTERFACE!
-import src.entities.factories.SpotifyApiSongFactory;
+package use_case.take_quiz;
+import entities.Question;
+import entities.Quiz;
+import entities.Song;
+import entities.factories.SongFactory;
+import data_access.QuizDataAccessObject; // OR CHANGE TO THE DAO INTERFACE!
+import entities.factories.SpotifyApiSongFactory;
 import src.api.ApiHandlerClient;
 
 import java.io.*;

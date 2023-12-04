@@ -1,5 +1,5 @@
-package src.data_access;
-import src.entities.Song;
+package data_access;
+import entities.Song;
 import src.entities.factories.SongFactory;
 
 import java.io.IOException;

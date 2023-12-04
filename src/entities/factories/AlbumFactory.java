@@ -1,6 +1,6 @@
-package src.entities.factories;
+package entities.factories;
 
-import src.entities.Album;
+import entities.Album;
 
 public interface AlbumFactory {
     Album create(String id);

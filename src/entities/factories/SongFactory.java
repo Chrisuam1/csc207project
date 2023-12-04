@@ -1,6 +1,6 @@
-package src.entities.factories;
+package entities.factories;
 
-import src.entities.Song;
+import entities.Song;
 
 public interface SongFactory {
     Song create(String id);

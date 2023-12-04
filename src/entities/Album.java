@@ -1,4 +1,4 @@
-package src.entities;
+package entities;
 
 import se.michaelthelin.spotify.model_objects.specification.ArtistSimplified;
 import se.michaelthelin.spotify.model_objects.specification.Image;
