@@ -29,7 +29,7 @@ public class Question {
         return this.answer;
     }
 
-    public Song getSong1(){
+    public Song getSong1() {
         return this.song1;
     }
 
