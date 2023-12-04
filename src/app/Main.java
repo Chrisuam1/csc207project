@@ -7,6 +7,7 @@ import view.ViewManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.concurrent.TimeUnit;
 
 public class Main {
 
@@ -48,19 +49,20 @@ public class Main {
 
         /** CHANGE setActiveView argument to test different views **/
 
-        viewManagerModel.setActiveView(logoScreenView.viewName);
-        viewManagerModel.firePropertyChanged();
 
-//        viewManagerModel.setActiveView(loadingScreenView.viewName);
-//        viewManagerModel.firePropertyChanged();
+        viewManagerModel.setActiveView(loadingScreenView.viewName);
+        viewManagerModel.firePropertyChanged();
 
         application.setVisible(true);
 
-//        try {
-//            TimeUnit.SECONDS.sleep(5);
-//        } catch (Exception e) {
-//            System.out.println(e.getMessage());
-//        }
+        try {
+            TimeUnit.SECONDS.sleep(5);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        viewManagerModel.setActiveView(logoScreenView.viewName);
+        viewManagerModel.firePropertyChanged();
 
         /** TESTING API AND ENTITIES **/
 

@@ -11,7 +11,6 @@ import use_case.take_quiz.TakeQuizInputData;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-
 public class TakeQuizInteractorTest {
 
     @Test
@@ -38,7 +37,7 @@ public class TakeQuizInteractorTest {
         Song song3 = new Song(
                 "c",
                 "titleC",
-                new ArrayList<>(Arrays.asList("Bart","Bertha")),
+                new ArrayList<>(Arrays.asList("Claire","Chris")),
                 0.3,
                 0.1,
                 null,
