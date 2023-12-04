@@ -1,5 +1,8 @@
 package use_case.take_quiz;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class TakeQuizInteractor implements TakeQuizInputBoundary {
 
     final TakeQuizOutputBoundary takeQuizPresenter;
@@ -15,13 +18,18 @@ public class TakeQuizInteractor implements TakeQuizInputBoundary {
     public void execute(TakeQuizInputData inputData) {
         if (takeQuizDataAccessObject.getNumSongs() == 0) {
             takeQuizPresenter.prepareFailView("No songs in database.");
-        } else if (inputData.getNumQuestions() > takeQuizDataAccessObject.getNumSongs()) {
+        } else if (inputData.getNumQuestions() * 2 > takeQuizDataAccessObject.getNumSongs()) {
             takeQuizPresenter.prepareFailView("Not enough songs in database.");
         } else {
 
-            //TakeQuizOutputData outputData = new TakeQuizOutputData();
             // chose an appropriate amount of songs
-            //takeQuizPresenter.prepareSuccessView();
+            try {
+                TakeQuizOutputData outputData = new TakeQuizOutputData(
+                    takeQuizDataAccessObject.getRandomSongs(inputData.getNumQuestions() * 2));
+                takeQuizPresenter.prepareSuccessView(outputData);
+            } catch (Exception e) {
+                takeQuizPresenter.prepareFailView(e.getMessage());
+            }
         }
     }
 }

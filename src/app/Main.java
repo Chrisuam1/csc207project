@@ -24,7 +24,7 @@ public class Main {
 
         // The main application window.
         JFrame application = new JFrame("Spotify Quiz");
-        application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        application.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         //application.setSize(1000, 800);
 
         application.setExtendedState(JFrame.MAXIMIZED_BOTH);

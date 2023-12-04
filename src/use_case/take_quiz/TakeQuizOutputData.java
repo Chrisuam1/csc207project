@@ -1,19 +1,28 @@
 package use_case.take_quiz;
 
+import entities.Question;
+import entities.Quiz;
+import entities.QuizTaker;
+import entities.Song;
+
+import java.util.ArrayList;
+
 public class TakeQuizOutputData {
-    final private int score;
-    final private int numQuestions;
+    private QuizTaker quizTaker;
 
-    public TakeQuizOutputData(int score, int numQuestions) {
-        this.score = score;
-        this.numQuestions = numQuestions;
+    public TakeQuizOutputData(QuizTaker quizTaker) {
+        this.quizTaker = quizTaker;
     }
 
-    public int getScore() {
-        return score;
+    public TakeQuizOutputData(ArrayList<Song> songs) {
+        Quiz quiz = new Quiz();
+        for (int i = 0; i < songs.size() - 1; i += 2) {
+            quiz.addQuestion(new Question(songs.get(i), songs.get(i + 1)));
+        }
+        quizTaker = new QuizTaker(quiz);
     }
 
-    public int getNumQuestions() {
-        return numQuestions;
+    public QuizTaker getQuizTaker() {
+        return quizTaker;
     }
 }
