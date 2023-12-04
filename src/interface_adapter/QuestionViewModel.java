@@ -1,6 +1,7 @@
-package src.view;
+package interface_adapter;
 
 import java.awt.image.BufferedImage;
+import java.beans.PropertyChangeListener;
 
 public class QuestionViewModel extends ViewModel {
     private String questionNumber;
@@ -20,7 +21,12 @@ public class QuestionViewModel extends ViewModel {
     }
 
     @Override
-    public void propertyChanged() {
+    public void firePropertyChanged() {
+
+    }
+
+    @Override
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
 
     }
 

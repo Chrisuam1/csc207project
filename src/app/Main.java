@@ -1,10 +1,7 @@
 package app;
 
 import interface_adapter.ViewManagerModel;
-import view.LoadingScreenView;
-import view.LogoScreenView;
-import view.MainMenuView;
-import view.ViewManager;
+import view.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -46,6 +43,9 @@ public class Main {
         MainMenuView mainMenuView = new MainMenuView();
         views.add(mainMenuView, mainMenuView.viewName);
 
+        QuestionView questionView = new QuestionView();
+        views.add(questionView, questionView.viewName);
+
 
         // This keeps track of and manages which view is currently showing.
         ViewManagerModel viewManagerModel = new ViewManagerModel();
@@ -55,32 +55,33 @@ public class Main {
         /** CHANGE setActiveView argument to test different views **/
 
 
-        viewManagerModel.setActiveView(mainMenuView.viewName);
+        viewManagerModel.setActiveView(logoScreenView.viewName);
         viewManagerModel.firePropertyChanged();
 
         application.setVisible(true);
-//
-//        try {
-//            TimeUnit.SECONDS.sleep(5);
-//        } catch (Exception e) {
-//            System.out.println(e.getMessage());
-//        }
-//
-//        viewManagerModel.setActiveView(logoScreenView.viewName);
-//        viewManagerModel.firePropertyChanged();
-//
-//        application.setVisible(true);
-//
-//        try {
-//            TimeUnit.SECONDS.sleep(5);
-//        } catch (Exception e) {
-//            System.out.println(e.getMessage());
-//        }
-//
-//        viewManagerModel.setActiveView(loadingScreenView.viewName);
-//        viewManagerModel.firePropertyChanged();
-//
-//        application.setVisible(true);
+
+        try {
+            TimeUnit.SECONDS.sleep(0);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        viewManagerModel.setActiveView(loadingScreenView.viewName);
+        viewManagerModel.firePropertyChanged();
+
+        application.setVisible(true);
+
+        try {
+            TimeUnit.SECONDS.sleep(0);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        viewManagerModel.setActiveView(mainMenuView.viewName);
+        viewManagerModel.firePropertyChanged();
+
+
+        application.setVisible(true);
 
         /** TESTING API AND ENTITIES **/
 

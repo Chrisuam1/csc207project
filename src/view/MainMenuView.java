@@ -17,7 +17,15 @@ public class MainMenuView extends JPanel implements ActionListener {
 
     JLabel backgroundLabel = new JLabel(backgroundImage);
     JLabel exitButton = new JLabel("exit");
-    MenuItemJLabel startQuizButton = new MenuItemJLabel("start quiz", startQuizIcon);
+
+    Dimension ss = Toolkit.getDefaultToolkit ().getScreenSize ();
+
+
+    private final int MENU_ITEM_WIDTH = 300;
+    private final int MENU_ITEM_HEIGHT = 400;
+
+    MenuItemJLabel startQuizHover = new MenuItemJLabel("start quiz", startQuizIcon, MENU_ITEM_WIDTH, MENU_ITEM_HEIGHT);
+    JButton startQuizButton = new JButton();
 
     // TODO: make constructor with controller and viewModel argument
     public MainMenuView() {
@@ -31,32 +39,20 @@ public class MainMenuView extends JPanel implements ActionListener {
         label1.setBackground(Color.red);
         label1.setOpaque(true);
         label1.setPreferredSize(new Dimension(100,100));
+        label1.setHorizontalAlignment(SwingConstants.CENTER);
+        label1.setVerticalAlignment(SwingConstants.CENTER);
 
-        backgroundLabel.add(startQuizButton);
-        startQuizButton.setBackground(Color.green);
-        startQuizButton.setOpaque(true);
+        backgroundLabel.add(startQuizHover);
+        //startQuizButton.setBackground(Color.pink);
+        //startQuizButton.setOpaque(true);
 
-        startQuizButton.setBounds(0,0,250,250);
+        startQuizHover.setBounds(ss.width/2 - MENU_ITEM_WIDTH / 2, ss.height/2 - MENU_ITEM_HEIGHT / 2,MENU_ITEM_WIDTH,MENU_ITEM_HEIGHT);
+        startQuizButton.setBounds(ss.width/2 - MENU_ITEM_WIDTH / 2, ss.height/2 - MENU_ITEM_HEIGHT / 2,MENU_ITEM_WIDTH,MENU_ITEM_HEIGHT);
+        startQuizButton.addActionListener(this);
 
-
-
-
-//        this.setBackground(themeColor);
-//        this.setLayout(new BorderLayout());
-//
-//        JLabel title = new JLabel("presented by");
-//        this.add(title);
-//        title.setHorizontalAlignment(SwingConstants.CENTER);
-//        title.setVerticalAlignment(SwingConstants.CENTER);
-//        title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
-//        title.setHorizontalTextPosition(JLabel.CENTER);
-//        title.setVerticalTextPosition(JLabel.TOP);
-//        title.setForeground(Color.black);
-//        title.setIcon(icon);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
     }
 }
