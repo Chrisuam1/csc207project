@@ -43,10 +43,6 @@ public class Main {
         MainMenuView mainMenuView = new MainMenuView();
         views.add(mainMenuView, mainMenuView.viewName);
 
-        QuestionView questionView = new QuestionView();
-        views.add(questionView, questionView.viewName);
-
-
         // This keeps track of and manages which view is currently showing.
         ViewManagerModel viewManagerModel = new ViewManagerModel();
         new ViewManager(views, cardLayout, viewManagerModel);
