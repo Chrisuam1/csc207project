@@ -17,7 +17,11 @@ public class MainMenuView extends JPanel implements ActionListener {
 
     JLabel backgroundLabel = new JLabel(backgroundImage);
     JLabel exitButton = new JLabel("exit");
-    MenuItemJLabel startQuizButton = new MenuItemJLabel("start quiz", startQuizIcon);
+
+    private final int MENU_ITEM_WIDTH = 300;
+    private final int MENU_ITEM_HEIGHT = 400;
+
+    MenuItemJLabel startQuizButton = new MenuItemJLabel("start quiz", startQuizIcon, MENU_ITEM_WIDTH, MENU_ITEM_HEIGHT);
 
     // TODO: make constructor with controller and viewModel argument
     public MainMenuView() {
@@ -33,10 +37,10 @@ public class MainMenuView extends JPanel implements ActionListener {
         label1.setPreferredSize(new Dimension(100,100));
 
         backgroundLabel.add(startQuizButton);
-        startQuizButton.setBackground(Color.green);
-        startQuizButton.setOpaque(true);
+        //startQuizButton.setBackground(Color.pink);
+        //startQuizButton.setOpaque(true);
 
-        startQuizButton.setBounds(0,0,250,250);
+        startQuizButton.setBounds(0,0,MENU_ITEM_WIDTH,MENU_ITEM_HEIGHT);
 
 
 

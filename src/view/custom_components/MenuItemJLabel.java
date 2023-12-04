@@ -8,30 +8,47 @@ import java.awt.event.MouseListener;
 /**
  *
  * This class is a JLabel that acts as a button. Shows '>' on the left upon mouse hover.
- *
+ * Minimum dimensions: 300 x 300
  */
 
 public class MenuItemJLabel extends JLabel implements MouseListener {
 
     public JLabel label;
-    public JLabel image;
+    public JLabel image = new JLabel("");
     public JLabel indicator = new JLabel(">");
+    public int width = getWidth();
+    public int height = getWidth();
 
     public MenuItemJLabel(String name) {
         this.label = new JLabel(name);
     }
 
-    public MenuItemJLabel(String name, ImageIcon icon) {
-        label = new JLabel(name);
+    public MenuItemJLabel(String name, ImageIcon icon, int width, int height) {
+        label = new JLabel(name, SwingConstants.CENTER);
+        label.setVerticalAlignment(SwingConstants.TOP);
         image.setIcon(icon);
         image.addMouseListener(this);
         this.setLayout(null);
+        this.add(label);
         this.add(image);
-        image.setBounds(0,0,250,250);
-        image.addMouseListener(this);
-        image.setLayout(new BorderLayout());
-        image.add(label, BorderLayout.EAST);
-        image.add(indicator);
+        this.add(indicator);
+
+        // TODO: debug
+//        label.setBackground(Color.darkGray);
+//        label.setOpaque(true);
+//        image.setBackground(Color.gray);
+//        image.setOpaque(true);
+//        indicator.setBackground(Color.lightGray);
+//        indicator.setOpaque(true);
+
+        indicator.setBounds((int)((width - 300) / 2),0,50,250);
+        image.setBounds((int)((width - 300) / 2) + 50,0,250,250);
+        label.setBounds( (int)((width - 300) / 2) + 50,250,width - 50,height - 250);
+
+        label.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
+        label.setForeground(Color.BLACK);
+        indicator.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 75));
+        indicator.setForeground(Color.BLACK);
     }
 
     @Override
@@ -52,12 +69,12 @@ public class MenuItemJLabel extends JLabel implements MouseListener {
     @Override
     public void mouseEntered(MouseEvent e) {
         indicator.setVisible(true);
-        label.setForeground(Color.red);
+        label.setForeground(Color.DARK_GRAY);
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
         indicator.setVisible(false);
-        label.setForeground(Color.BLUE);
+        label.setForeground(Color.black);
     }
 }
