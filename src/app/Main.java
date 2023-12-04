@@ -3,6 +3,7 @@ package app;
 import interface_adapter.ViewManagerModel;
 import view.LoadingScreenView;
 import view.LogoScreenView;
+import view.MainMenuView;
 import view.ViewManager;
 
 import javax.swing.*;
@@ -42,6 +43,10 @@ public class Main {
         LogoScreenView logoScreenView = new LogoScreenView();
         views.add(logoScreenView, logoScreenView.viewName);
 
+        MainMenuView mainMenuView = new MainMenuView();
+        views.add(mainMenuView, mainMenuView.viewName);
+
+
         // This keeps track of and manages which view is currently showing.
         ViewManagerModel viewManagerModel = new ViewManagerModel();
         new ViewManager(views, cardLayout, viewManagerModel);
@@ -50,19 +55,32 @@ public class Main {
         /** CHANGE setActiveView argument to test different views **/
 
 
-        viewManagerModel.setActiveView(loadingScreenView.viewName);
+        viewManagerModel.setActiveView(mainMenuView.viewName);
         viewManagerModel.firePropertyChanged();
 
         application.setVisible(true);
-
-        try {
-            TimeUnit.SECONDS.sleep(5);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-        viewManagerModel.setActiveView(logoScreenView.viewName);
-        viewManagerModel.firePropertyChanged();
+//
+//        try {
+//            TimeUnit.SECONDS.sleep(5);
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+//
+//        viewManagerModel.setActiveView(logoScreenView.viewName);
+//        viewManagerModel.firePropertyChanged();
+//
+//        application.setVisible(true);
+//
+//        try {
+//            TimeUnit.SECONDS.sleep(5);
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+//
+//        viewManagerModel.setActiveView(loadingScreenView.viewName);
+//        viewManagerModel.firePropertyChanged();
+//
+//        application.setVisible(true);
 
         /** TESTING API AND ENTITIES **/
 
