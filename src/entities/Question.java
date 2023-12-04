@@ -1,33 +1,31 @@
-package src.entities;
+package entities;
 
-import java.util.ArrayList;
-
-import java.lang.Math;
+/**
+ * A question that asks which of two songs is more popular (as determined by spotify).
+ * Awards more points if the two songs have similar popularity scores.
+ */
 
 public class Question {
-    public Song answer;
 
-    public Song song1;
+    private final Song answer;
+    private final Song song1;
+    private final Song song2;
+    private final double pointsAwarded;
 
-    public Song song2;
-
-    public double pointsAwarded;
-
-    public Question(ArrayList<Song> songList){
-        // Setting song1 and song2 attributes
-        this.song1 = songList.get(0);
-        this.song2 = songList.get(1);
-        // Setting answer attribute
-        if (this.song1.getPopularity() > this.song2.getPopularity()) {
-            this.answer = song1;
-        } else {
-            this.answer = song2;
-        }
-        // Setting pointsAwarded attribute
-        this.pointsAwarded = (1 / (this.song1.getPopularity() - this.song2.getPopularity())) * 1000;
+    /**
+     * Creates a question based on two songs' popularity
+     * Precondition: song1.popularity != song2.popularity
+     * @param song1
+     * @param song2
+     */
+    public Question(Song song1, Song song2) {
+        this.song1 = song1;
+        this.song2 = song2;
+        pointsAwarded = calculatePointsAwarded();
+        answer = calculateAnswer();
     }
 
-    public Song getAnswer() {
+    public Song getAnswer(){
         return this.answer;
     }
 
@@ -35,11 +33,27 @@ public class Question {
         return this.song1;
     }
 
-    public Song getSong2() {
-        return this.song2;
+    public Song getSong2(){
+        return song2;
     }
 
-    public double getPointsAwarded() {
+    public double getPointsAwarded(){
         return this.pointsAwarded;
+    }
+
+    // helper method that determines how many points are awarded
+    private double calculatePointsAwarded() {
+        return ((1 /
+                Math.abs(
+                        (this.song1.getPopularity() - this.song2.getPopularity())
+                )) * 1000);
+    }
+
+    // helper method that determines the answer
+    private Song calculateAnswer() {
+        if (song1.getPopularity() > song2.getPopularity()) {
+            return song1;
+        }
+        else return song2;
     }
 }

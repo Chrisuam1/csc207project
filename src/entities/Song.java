@@ -1,35 +1,61 @@
-package src.entities;
+package entities;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a song from Spotify's database
+ */
+
 public class Song {
     private final String id;
-    private String title;
-    private ArrayList<String> artists;
-    private double popularity;
-    private double danceability;
-    private String yearReleased;
-    private Album album;
+    private final String title;
+    private final ArrayList<String> artists;
+    private final double popularity;
+    private final double danceability;
+    private final Album album;
+    private final String yearReleased;
 
-    public Song(String id) {
+    public Song(String id,
+                String title,
+                ArrayList<String> artists,
+                double popularity,
+                double danceability,
+                Album album,
+                String yearReleased) {
         this.id = id;
+        this.title = title;
+        this.artists = artists;
+        this.popularity = popularity;
+        this.danceability = danceability;
+        this.album = album;
+        this.yearReleased = yearReleased;
     }
 
-    public String getID() {return id;}
-    public String getTitle() {return title; }
-    public void setTitle(String title) {this.title = title;}
+    public String getId() {
+        return id;
+    }
 
-    public ArrayList<String> getArtists() {return artists;}
+    public String getTitle() {
+        return title;
+    }
 
-    public double getPopularity() {return popularity; }
-    public void setPopularity(double popularity) {this.popularity = popularity;}
+    public ArrayList<String> getArtists() {
+        return artists;
+    }
 
-    public double getDanceability() {return danceability; }
-    public void setDanceability(double danceability) {this.danceability = danceability;}
+    public double getPopularity() {
+        return popularity;
+    }
 
-    public String getYearReleased() {return yearReleased; }
-    public void setYearReleased(String yearReleased) {this.yearReleased = yearReleased;}
+    public double getDanceability() {
+        return danceability;
+    }
 
-    public Album getAlbum() {return album; }
-    public void setAlbum(Album album) {this.album = album;}
+    public Album getAlbum() {
+        return album;
+    }
+
+    public String getYearReleased() {
+        return yearReleased;
+    }
 }

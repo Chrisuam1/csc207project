@@ -1,52 +1,28 @@
-package src.use_case.take_quiz;
-import src.entities.Question;
-import src.entities.Quiz;
-import src.entities.Song;
-import src.entities.factories.SongFactory;
-import src.data_access.QuizDataAccessObject; // OR CHANGE TO THE DAO INTERFACE!
-import src.entities.factories.SpotifyApiSongFactory;
-import src.api.ApiHandlerClient;
+package use_case.take_quiz;
 
-import java.io.*;
-import java.util.ArrayList;
+public class TakeQuizInteractor implements TakeQuizInputBoundary{
 
-import java.util.Scanner;
-import java.util.Random;
-import java.io.IOException;
+    final TakeQuizOutputBoundary takeQuizPresenter;
+    final TakeQuizDataAccessInterface takeQuizDataAccessObject;
 
-import java.io.BufferedReader;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-public class TakeQuizInteractor {
+    public TakeQuizInteractor(TakeQuizOutputBoundary takeQuizPresenter,
+                              TakeQuizDataAccessInterface takeQuizDataAccessObject) {
+        this.takeQuizPresenter = takeQuizPresenter;
+        this.takeQuizDataAccessObject = takeQuizDataAccessObject;
+    }
 
-    public ArrayList<Song> generate2RandomSongs(ArrayList<Song> masterlist) {
-        // Creating a Random object
-        Random rand = new Random();
+    @Override
+    public void execute(TakeQuizInputData inputData) {
+        if (takeQuizDataAccessObject.getNumSongs() == 0) {
+            takeQuizPresenter.prepareFailView("No songs in database.");
+        } else if (inputData.getNumQuestions() > takeQuizDataAccessObject.getNumSongs()) {
+            takeQuizPresenter.prepareFailView("Not enough songs in database.");
+        } else {
 
-        // Creating an empty ArrayList to store 2 random songs
-        ArrayList<Song> finalSongs = new ArrayList<Song>();
-
-        // Getting a random list index 1 and 2
-        int size = masterlist.size();
-        int ranIndex1 = rand.nextInt(size);
-        int ranIndex2 = rand.nextInt(size);
-
-        Song ranSong1 = masterlist.get(ranIndex1);
-        Song ranSong2 = masterlist.get(ranIndex2);
-
-        // If indexes are equal OR songs have same popularity, we choose a new random index/song
-        while ((ranIndex1 == ranIndex2) || (ranSong1.getPopularity() == ranSong2.getPopularity())) {
-            ranIndex2 = rand.nextInt(masterlist.size());
+            //TakeQuizOutputData outputData = new TakeQuizOutputData();
+            // chose an appropriate amount of songs
+            //takeQuizPresenter.prepareSuccessView();
         }
-
-        Song finalRanSong2 = masterlist.get(ranIndex2);
-
-        // Storing both songs in empty ArrayList
-        finalSongs.add(ranSong1);
-        finalSongs.add(finalRanSong2);
-        return finalSongs;
     }
     public void execute() {
         // STEP 0: Creating an ApiHandlerClient object to use to make SongFactory

@@ -1,12 +1,16 @@
-package src.entities.factories;
+package entities.factories;
 
-import src.api.ApiHandlerClient;
 import se.michaelthelin.spotify.model_objects.specification.ArtistSimplified;
 import se.michaelthelin.spotify.model_objects.specification.AudioFeatures;
 import se.michaelthelin.spotify.model_objects.specification.Track;
-import src.entities.Song;
-import src.entities.factories.SongFactory;
-import src.entities.factories.SpotifyApiAlbumFactory;
+import api.ApiHandlerClient;
+import entities.Song;
+import entities.Album;
+import java.util.ArrayList;
+
+/**
+ * Creates a Song from a song ID using the spotify API
+ */
 
 public class SpotifyApiSongFactory implements SongFactory {
     ApiHandlerClient api;
@@ -14,22 +18,26 @@ public class SpotifyApiSongFactory implements SongFactory {
     public SpotifyApiSongFactory(ApiHandlerClient api) {
         this.api = api;
     }
+
     @Override
     public Song create(String id) {
-        Song song = new Song(id);
-        Track t = api.makeTrackRequest(song.getID());
-        AudioFeatures a = api.makeAudioFeaturesRequest(song.getID());
 
-        song.setTitle(t.getName());
-        song.setPopularity(t.getPopularity());
-        song.setDanceability(a.getDanceability());
-        song.setAlbum(
-                new SpotifyApiAlbumFactory(api).create(t.getAlbum().getId()));
-        song.setYearReleased(song.getAlbum().getYearReleased());
+        // get the song and its features using the API
+        Track spotifySong = api.makeTrackRequest(id);
+        AudioFeatures spotifySongFeatures = api.makeAudioFeaturesRequest(id);
 
-        for (ArtistSimplified i : t.getArtists()) {
-            song.getArtists().add(i.getName());
+        String name = spotifySong.getName();
+        double popularity = spotifySong.getPopularity();
+        double danceability = spotifySongFeatures.getDanceability();
+        Album album = new SpotifyApiAlbumFactory(api).create(spotifySong.getAlbum().getId());
+        String yearReleased = album.getYearReleased();
+
+        // get artists for the track
+        ArrayList<String> artists = new ArrayList<>();
+        for (ArtistSimplified artist : spotifySong.getArtists()) {
+            artists.add(artist.getName());
         }
-        return song;
+
+        return new Song (id, name, artists, popularity, danceability, album, yearReleased);
     }
 }

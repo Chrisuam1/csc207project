@@ -1,49 +1,60 @@
-package src.entities.factories;
+package entities.factories;
 
-import src.api.ApiHandlerClient;
+import api.ApiHandlerClient;
 import se.michaelthelin.spotify.model_objects.specification.ArtistSimplified;
 import se.michaelthelin.spotify.model_objects.specification.Image;
 import se.michaelthelin.spotify.model_objects.specification.Paging;
 import se.michaelthelin.spotify.model_objects.specification.TrackSimplified;
-import src.entities.Album;
 
 import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+/**
+ * Creates an Album from an album ID using the Spotify API
+ */
 
 public class SpotifyApiAlbumFactory implements AlbumFactory {
     ApiHandlerClient api;
 
     public SpotifyApiAlbumFactory(ApiHandlerClient api) {this.api = api;}
     @Override
-    public Album create(String id) {
-        Album album = new Album(id);
-        se.michaelthelin.spotify.model_objects.specification.Album spotifyAlbum =
-                api.makeAlbumRequest(album.getId());
+    public entities.Album create(String id) {
 
-        album.setTitle(spotifyAlbum.getName());
-        album.setYearReleased(spotifyAlbum.getReleaseDate());
+        // NOTE: entities.Album != spotify api Album
+        // need to disambiguate since they have the same name
+        se.michaelthelin.spotify.model_objects.specification.Album spotifyAlbum = api.makeAlbumRequest(id);
 
+        String title = spotifyAlbum.getName();
+        String yearReleased = spotifyAlbum.getReleaseDate();
+
+        // get songs in album
+        HashMap<String, String> songs = new HashMap<>();
+        Paging<TrackSimplified> tracks = spotifyAlbum.getTracks();
+        for (TrackSimplified song : tracks.getItems()) {
+            songs.put(song.getId(), song.getName());
+        }
+
+        // get artists for the album
+        ArrayList<String> artists = new ArrayList<>();
+        for (ArtistSimplified i : spotifyAlbum.getArtists()) {
+            artists.add(i.getName());
+        }
+
+        // get cover images for the album
+        ArrayList<BufferedImage> coverImages = new ArrayList<>();
         Image[] images = spotifyAlbum.getImages();
         for (Image i : images) {
             try {
-                album.getCoverImages().add(ImageIO.read(new URL(i.getUrl())));
+                coverImages.add(ImageIO.read(new URL(i.getUrl())));
             } catch (IOException e) {
                 System.out.println("Exception: " + e.getMessage());
             }
         }
 
-        ArtistSimplified[] artists = spotifyAlbum.getArtists();
-        for (ArtistSimplified i : artists) {
-            album.getArtists().add(i.getName());
-        }
-
-        Paging<TrackSimplified> tracks = spotifyAlbum.getTracks();
-        for (TrackSimplified i : tracks.getItems()) {
-            album.getSongs().add(
-                    new SpotifyApiSongFactory(api).create(i.getId())
-            ); // Iterate through all the TrackSimplified-s and create Song objects
-        }
-        return album;
+        return new entities.Album(id, title, songs, artists, coverImages, yearReleased);
     }
 }
