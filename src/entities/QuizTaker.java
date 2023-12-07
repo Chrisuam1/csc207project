@@ -8,6 +8,7 @@ import java.util.LinkedList;
 public class QuizTaker {
     private final Quiz quiz;
     private LinkedList<Question> questions;
+    private int currentQuestionNumber = 0;
 
     public QuizTaker(Quiz quiz) {
         this.quiz = quiz;
@@ -22,7 +23,13 @@ public class QuizTaker {
         return !questions.isEmpty();
     }
 
-    public Question getNextQuestion() {
+    public Question popNextQuestion() {
+        currentQuestionNumber++;
         return questions.pop();
+    }
+    public Question getCurrentQuestion() {return questions.get(0); }
+
+    public int getCurrentQuestionNumber() {
+        return currentQuestionNumber;
     }
 }
