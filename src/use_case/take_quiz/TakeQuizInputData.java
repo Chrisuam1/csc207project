@@ -7,7 +7,7 @@ public class TakeQuizInputData {
     // final private Player;
     final private int numQuestions;
 
-    public TakeQuizInputData(Player p, Quiz q, int numQuestions) {
+    public TakeQuizInputData(int numQuestions) {
         // this.player = p;
         this.numQuestions = numQuestions;
     }
