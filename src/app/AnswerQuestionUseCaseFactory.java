@@ -1,6 +1,6 @@
 package app;
 
-import interface_adapter.AnswerQuestionViewModel;
+import interface_adapter.answer_question.AnswerQuestionViewModel;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.answer_question.AnswerQuestionController;
 import interface_adapter.answer_question.AnswerQuestionPresenter;
