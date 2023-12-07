@@ -1,5 +1,7 @@
 package interface_adapter.answer_question;
 
+import entities.QuizTaker;
+
 import java.awt.image.BufferedImage;
 
 public class AnswerQuestionState {
@@ -16,6 +18,21 @@ public class AnswerQuestionState {
     private BufferedImage coverImage2 = null;
 
     public AnswerQuestionState() {}
+
+    // Updates state depending on the current question of the QuizTaker.
+    // DOES NOT UPDATE SCORE
+    public void setQuizTaker(QuizTaker quiz) {
+        this.setQuestionNumber(Integer.toString(quiz.getCurrentQuestionNumber()));
+        this.setSongName1(quiz.getCurrentQuestion().getSong1().getTitle());
+        this.setSongName2(quiz.getCurrentQuestion().getSong2().getTitle());
+        this.setAlbumName1(quiz.getCurrentQuestion().getSong1().getAlbum().getTitle());
+        this.setAlbumName2(quiz.getCurrentQuestion().getSong2().getAlbum().getTitle());
+        this.setArtistName1(quiz.getCurrentQuestion().getSong1().getArtists().get(0));
+        this.setArtistName2(quiz.getCurrentQuestion().getSong2().getArtists().get(0));
+        this.setCoverImage1(quiz.getCurrentQuestion().getSong1().getAlbum().getCoverImages().get(0));
+        this.setCoverImage2(quiz.getCurrentQuestion().getSong2().getAlbum().getCoverImages().get(0));
+
+    }
 
     public String getQuestionNumber() {
         return questionNumber;
