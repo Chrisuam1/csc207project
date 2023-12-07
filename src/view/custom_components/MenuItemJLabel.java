@@ -17,6 +17,8 @@ public class MenuItemJLabel extends JLabel implements MouseListener {
     public final JLabel button;
     public final JLabel label;
     private final JLabel indicator = new JLabel(">");
+    public JLabel image = null;
+    private ImageIcon icon = null;
 
     public MenuItemJLabel(String name, int width) {
         label = new JLabel(name, SwingConstants.CENTER);
@@ -36,12 +38,14 @@ public class MenuItemJLabel extends JLabel implements MouseListener {
         indicator.setVisible(false);
     }
 
-    public MenuItemJLabel(String name, ImageIcon icon, int width, int height) {
+    public MenuItemJLabel(String name, ImageIcon icon, int width, int height, int fontSize) {
+        this.icon = icon;
+
         label = new JLabel(name, SwingConstants.CENTER);
         label.setVerticalAlignment(SwingConstants.TOP);
-        JLabel image = new JLabel("");
+        image = new JLabel("");
         button = image;
-        image.setIcon(icon);
+        image.setIcon(this.icon);
         image.addMouseListener(this);
         this.setLayout(null);
         this.add(label);
@@ -52,7 +56,7 @@ public class MenuItemJLabel extends JLabel implements MouseListener {
         image.setBounds((int)((width - 300) / 2) + 50,0,250,250);
         label.setBounds( (int)((width - 300) / 2) + 50,250,width - 50,height - 250);
 
-        label.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
+        label.setFont(new Font(Font.SANS_SERIF, Font.BOLD, fontSize));
         label.setForeground(Color.BLACK);
         indicator.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 75));
         indicator.setForeground(Color.BLACK);
@@ -65,6 +69,19 @@ public class MenuItemJLabel extends JLabel implements MouseListener {
 //        image.setOpaque(true);
 //        indicator.setBackground(Color.lightGray);
 //        indicator.setOpaque(true);
+
+    }
+
+    public void updateLabel(String text) {
+        this.label.setText(text);
+    }
+
+    public void updateLabel(String text, ImageIcon icon, int width, int height) {
+        this.label.setText(text);
+        Image originalIcon = icon.getImage();
+        Image resizedIcon = originalIcon.getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH);
+        ImageIcon finalIcon = new ImageIcon(resizedIcon);
+        this.image.setIcon(finalIcon);
 
     }
 
