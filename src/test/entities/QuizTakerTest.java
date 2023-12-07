@@ -78,5 +78,5 @@ public class QuizTakerTest {
     public void hasMoreQuestions() {assertTrue(quizTaker.hasMoreQuestions());}
 
     @Test
-    public void getNextQuestion() {assertEquals(question1, quizTaker.getNextQuestion());}
+    public void getNextQuestion() {assertEquals(question1, quizTaker.popNextQuestion());}
 }
