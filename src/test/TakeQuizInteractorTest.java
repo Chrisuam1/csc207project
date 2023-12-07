@@ -14,7 +14,7 @@ import java.util.Arrays;
 public class TakeQuizInteractorTest {
 
     @Test
-    void TakeQuizInteractor() {
+    public void TakeQuizInteractor() {
 
         Song song1 = new Song(
                 "a",
