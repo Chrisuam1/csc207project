@@ -53,7 +53,7 @@ public class TakeQuizInteractorTest {
         Quiz quiz = new Quiz(questions);
 
         int NUM_SONGS = 10;
-        TakeQuizInputData inputData = new TakeQuizInputData(player, quiz, NUM_SONGS);
+        TakeQuizInputData inputData = new TakeQuizInputData(NUM_SONGS);
     }
 
 }
