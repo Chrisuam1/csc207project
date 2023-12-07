@@ -1,22 +1,17 @@
-package use_case.take_quiz.answer_question;
+package use_case.answer_question;
 
 import entities.Player;
 import entities.Question;
+import entities.QuizTaker;
 
 public class AnswerQuestionInputData {
-    final private Player player;
-    final private Question question;
+    final private QuizTaker quiz;
 
-    public AnswerQuestionInputData(Player player, Question question) {
-        this.player = player;
-        this.question = question;
+    public AnswerQuestionInputData(QuizTaker quiz) {
+        this.quiz = quiz;
     }
 
-    public Player getPlayer() {
-        return player;
-    }
-
-    public Question getQuestion() {
-        return question;
+    public QuizTaker getQuiz() {
+        return quiz;
     }
 }

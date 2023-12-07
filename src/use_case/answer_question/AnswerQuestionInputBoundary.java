@@ -1,4 +1,4 @@
-package use_case.take_quiz.answer_question;
+package use_case.answer_question;
 
 public interface AnswerQuestionInputBoundary {
 
