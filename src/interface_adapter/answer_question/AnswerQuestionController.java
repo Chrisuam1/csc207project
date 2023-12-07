@@ -12,13 +12,13 @@ public class AnswerQuestionController {
         this.answerQuestionInteractor = answerQuestionInteractor;
     }
 
-    public void executeCorrectAnswer(QuizTaker quizTaker, double score) {
-        AnswerQuestionInputData inputData = new AnswerQuestionInputData(quizTaker, score);
+    public void executeCorrectAnswer(QuizTaker quizTaker, double scoreAwarded) {
+        AnswerQuestionInputData inputData = new AnswerQuestionInputData(quizTaker, scoreAwarded);
         answerQuestionInteractor.executeAnsweredCorrectly(inputData);
     }
 
-    public void executeIncorrectAnswer(QuizTaker quizTaker, double score) {
-        AnswerQuestionInputData inputData = new AnswerQuestionInputData(quizTaker, score);
+    public void executeIncorrectAnswer(QuizTaker quizTaker, double scoreAwarded) {
+        AnswerQuestionInputData inputData = new AnswerQuestionInputData(quizTaker, scoreAwarded);
         answerQuestionInteractor.executeAnsweredIncorrectly(inputData);
     }
 }

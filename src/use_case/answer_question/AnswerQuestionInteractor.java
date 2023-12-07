@@ -9,7 +9,22 @@ public class AnswerQuestionInteractor implements AnswerQuestionInputBoundary{
     }
 
     @Override
-    public void execute(AnswerQuestionInputData answerQuestionInputData) {
+    public void executeAnsweredCorrectly(AnswerQuestionInputData answerQuestionInputData) {
+        if (answerQuestionInputData.getQuiz().hasMoreQuestions()) {
+            answerQuestionPresenter.prepareCorrectAnswerView(answerQuestionInputData);
+        } else {
+            AnswerQuestionOutputData outputData = new AnswerQuestionOutputData(answerQuestionInputData.getScore());
+            answerQuestionPresenter.prepareQuizEndView(outputData);
+        }
+    }
 
+    @Override
+    public void executeAnsweredIncorrectly(AnswerQuestionInputData answerQuestionInputData) {
+        if (answerQuestionInputData.getQuiz().hasMoreQuestions()) {
+            answerQuestionPresenter.prepareWrongAnswerView(answerQuestionInputData);
+        } else {
+            AnswerQuestionOutputData outputData = new AnswerQuestionOutputData(0.0);
+            answerQuestionPresenter.prepareQuizEndView(outputData);
+        }
     }
 }

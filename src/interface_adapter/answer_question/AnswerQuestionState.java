@@ -6,8 +6,8 @@ import java.awt.image.BufferedImage;
 
 public class AnswerQuestionState {
 
-    private String questionNumber = "";
-    private String score = "";
+    private int questionNumber = 0;
+    private double score = 0.0;
     private String songName1 = "";
     private String songName2 = "";
     private String artistName1 = "";
@@ -23,7 +23,7 @@ public class AnswerQuestionState {
     // Updates state depending on the current question of the QuizTaker.
     // DOES NOT UPDATE SCORE
     public void setQuizTaker(QuizTaker quiz) {
-        this.setQuestionNumber(Integer.toString(quiz.getCurrentQuestionNumber()));
+        this.setQuestionNumber(quiz.getCurrentQuestionNumber());
         this.setSongName1(quiz.getCurrentQuestion().getSong1().getTitle());
         this.setSongName2(quiz.getCurrentQuestion().getSong2().getTitle());
         this.setAlbumName1(quiz.getCurrentQuestion().getSong1().getAlbum().getTitle());
@@ -35,19 +35,19 @@ public class AnswerQuestionState {
         this.quizTaker = quiz;
     }
 
-    public String getQuestionNumber() {
+    public int getQuestionNumber() {
         return questionNumber;
     }
 
-    public void setQuestionNumber(String questionNumber) {
+    public void setQuestionNumber(int questionNumber) {
         this.questionNumber = questionNumber;
     }
 
-    public String getScore() {
+    public double getScore() {
         return score;
     }
 
-    public void setScore(String score) {
+    public void setScore(double score) {
         this.score = score;
     }
 

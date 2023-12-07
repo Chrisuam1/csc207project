@@ -1,7 +1,6 @@
 package use_case.answer_question;
 
-import entities.Player;
-import entities.Question;
+import entities.QuizTaker;
 
 public class AnswerQuestionOutputData {
     final private double score;

@@ -43,6 +43,12 @@ public class Question {
 
     // helper method that determines how many points are awarded
     private double calculatePointsAwarded() {
+
+        // TODO: make client handle songs with equal popularity
+        if (song1.getPopularity() == song2.getPopularity()) {
+            return 0.0;
+        }
+
         return ((1 /
                 Math.abs(
                         (this.song1.getPopularity() - this.song2.getPopularity())

@@ -1,10 +1,16 @@
 package app;
 
+import api.ApiHandlerClient;
+import data_access.FileSongsDataAccessObject;
+import entities.factories.SpotifyApiSongFactory;
 import interface_adapter.ViewManagerModel;
-import view.LoadingScreenView;
-import view.LogoScreenView;
-import view.MainMenuView;
-import view.ViewManager;
+import interface_adapter.answer_question.AnswerQuestionViewModel;
+import interface_adapter.take_quiz.TakeQuizController;
+import interface_adapter.take_quiz.TakeQuizPresenter;
+import use_case.take_quiz.TakeQuizInputBoundary;
+import use_case.take_quiz.TakeQuizInteractor;
+import use_case.take_quiz.TakeQuizOutputBoundary;
+import view.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,75 +18,96 @@ import java.util.concurrent.TimeUnit;
 
 public class Main {
 
+    private static final String CSV_FILE = "topSongs.csv";
+
+    //Test environment variables
+    private static final String ID = System.getenv("ID");
+    private static final String SECRET = System.getenv("SECRET");
+
     public static void main(String[] args) {
 
-        //Test environment variables
-        String ID = System.getenv("ID");
-        String SECRET = System.getenv("SECRET");
         System.out.println("ID=" + ID + "; SECRET=" + SECRET);
 
-        // Build the main program window, the main panel containing the
-        // various cards, and the layout, and stitch them together.
+        final boolean TESTING = false;
+        try {
 
-        // The main application window.
-        JFrame application = new JFrame("Spotify Quiz");
-        application.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        //application.setSize(1000, 800);
+            // Initialize API and authenticate, create DAO (still needs to be initialized)
+            ApiHandlerClient api = new ApiHandlerClient(ID, SECRET);
 
-        application.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        application.setUndecorated(true);
-        //device.setFullScreenWindow(application);
+            if (!TESTING){
+                api.authenticate();
+            }
+            FileSongsDataAccessObject fileSongsDAO = new FileSongsDataAccessObject(CSV_FILE, new SpotifyApiSongFactory(api));
 
-        CardLayout cardLayout = new CardLayout();
+            // Build the main program window, the main panel containing the
+            // various cards, and the layout, and stitch them together.
+            // The main application window.
+            JFrame application = new JFrame("Spotify Quiz");
+            application.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            application.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            application.setUndecorated(true);
+            CardLayout cardLayout = new CardLayout();
 
-        // The various View objects. Only one view is visible at a time.
-        JPanel views = new JPanel(cardLayout);
-        application.add(views);
+            // The various View objects. Only one view is visible at a time.
+            JPanel views = new JPanel(cardLayout);
+            application.add(views);
+            ViewManagerModel viewManagerModel = new ViewManagerModel();
 
-        LoadingScreenView loadingScreenView = new LoadingScreenView();
-        views.add(loadingScreenView, loadingScreenView.viewName);
+            LoadingScreenView loadingScreenView = new LoadingScreenView();
+            views.add(loadingScreenView, loadingScreenView.viewName);
 
-        LogoScreenView logoScreenView = new LogoScreenView();
-        views.add(logoScreenView, logoScreenView.viewName);
+            LogoScreenView logoScreenView = new LogoScreenView();
+            views.add(logoScreenView, logoScreenView.viewName);
 
-        MainMenuView mainMenuView = new MainMenuView();
-        views.add(mainMenuView, mainMenuView.viewName);
+            AnswerQuestionViewModel answerQuestionViewModel = new AnswerQuestionViewModel();
+            TakeQuizOutputBoundary takeQuizPresenter = new TakeQuizPresenter(answerQuestionViewModel, viewManagerModel);
+            TakeQuizInputBoundary takeQuizInteractor = new TakeQuizInteractor(takeQuizPresenter, fileSongsDAO);
+            TakeQuizController takeQuizController = new TakeQuizController(takeQuizInteractor);
+
+            MainMenuView mainMenuView = new MainMenuView(takeQuizController);
+            views.add(mainMenuView, mainMenuView.viewName);
+
+            ResultsView resultsView = new ResultsView(viewManagerModel, mainMenuView, answerQuestionViewModel);
+            views.add(resultsView, resultsView.viewName);
+
+            AnswerQuestionView answerQuestionView = AnswerQuestionUseCaseFactory.create(viewManagerModel, answerQuestionViewModel, resultsView);
+            views.add(answerQuestionView, answerQuestionView.viewName);
+
+            // This keeps track of and manages which view is currently showing.
+            new ViewManager(views, cardLayout, viewManagerModel);
+            application.setVisible(true);
+
+            // PLACE ALL THE VIEWS THAT YOU WANT TO BYPASS WHEN TESTING HERE
+            if (!TESTING) {
+
+                // Display loading screen while the DAO uses the API to create a song database
+                viewManagerModel.setActiveView(loadingScreenView.viewName);
+                viewManagerModel.firePropertyChanged();
+
+                fileSongsDAO.init();
+
+                TimeUnit.SECONDS.sleep(2);
+
+                viewManagerModel.setActiveView(logoScreenView.viewName);
+                viewManagerModel.firePropertyChanged();
+
+                TimeUnit.SECONDS.sleep(2);
+
+                viewManagerModel.setActiveView(mainMenuView.viewName);
+                viewManagerModel.firePropertyChanged();
+
+            } else {
+
+                viewManagerModel.setActiveView(resultsView.viewName);
+                viewManagerModel.firePropertyChanged();
+
+            }
 
 
-        // This keeps track of and manages which view is currently showing.
-        ViewManagerModel viewManagerModel = new ViewManagerModel();
-        new ViewManager(views, cardLayout, viewManagerModel);
 
-
-        /** CHANGE setActiveView argument to test different views **/
-
-
-        viewManagerModel.setActiveView(mainMenuView.viewName);
-        viewManagerModel.firePropertyChanged();
-
-        application.setVisible(true);
-//
-//        try {
-//            TimeUnit.SECONDS.sleep(5);
-//        } catch (Exception e) {
-//            System.out.println(e.getMessage());
-//        }
-//
-//        viewManagerModel.setActiveView(logoScreenView.viewName);
-//        viewManagerModel.firePropertyChanged();
-//
-//        application.setVisible(true);
-//
-//        try {
-//            TimeUnit.SECONDS.sleep(5);
-//        } catch (Exception e) {
-//            System.out.println(e.getMessage());
-//        }
-//
-//        viewManagerModel.setActiveView(loadingScreenView.viewName);
-//        viewManagerModel.firePropertyChanged();
-//
-//        application.setVisible(true);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
 
         /** TESTING API AND ENTITIES **/
 

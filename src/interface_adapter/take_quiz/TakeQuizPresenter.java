@@ -26,7 +26,7 @@ public class TakeQuizPresenter implements TakeQuizOutputBoundary {
 
         AnswerQuestionState answerQuestionState = new AnswerQuestionState();
         answerQuestionState.setQuizTaker(takeQuizOutputData.getQuizTaker());
-        answerQuestionState.setScore("0");
+        answerQuestionState.setScore(0.0);
         this.answerQuestionViewModel.setState(answerQuestionState);
         this.answerQuestionViewModel.firePropertyChanged();
         this.viewManagerModel.setActiveView(answerQuestionViewModel.getViewName());

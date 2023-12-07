@@ -29,8 +29,7 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
     private final int NUM_BUTTONS_START = 100;
     private final int NUM_BUTTONS_WIDTH = 100;
 
-    MenuItemJLabel startQuizButton = new MenuItemJLabel("start quiz", startQuizIcon, MENU_ITEM_WIDTH, MENU_ITEM_HEIGHT);
-    //MenuItemJLabel startQuizButton = new MenuItemJLabel("start quiz", 400);
+    MenuItemJLabel startQuizButton = new MenuItemJLabel("start quiz", startQuizIcon, MENU_ITEM_WIDTH, MENU_ITEM_HEIGHT, 50);
     MenuItemJLabel exitButton = new MenuItemJLabel("exit", 200);
     MenuItemJLabel numButton1 = new MenuItemJLabel("5", 100);
     MenuItemJLabel numButton2 = new MenuItemJLabel("10", 100);
@@ -38,7 +37,6 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
 
     private int numQuestions = 5;
 
-    // TODO: make constructor with controller and viewModel argument
     public MainMenuView(TakeQuizController controller) {
         this.setLayout(null);
         backgroundLabel.setBounds(0,0,1920,1080);

@@ -1,6 +1,7 @@
 package entities;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Represents a song from Spotify's database
@@ -57,5 +58,18 @@ public class Song {
 
     public String getYearReleased() {
         return yearReleased;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Song song = (Song) o;
+        return Objects.equals(id, song.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
