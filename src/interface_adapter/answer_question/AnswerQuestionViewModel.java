@@ -8,8 +8,8 @@ import java.beans.PropertyChangeSupport;
 public class AnswerQuestionViewModel extends ViewModel {
 
     public final String QUESTION_LABEL = "which song is more popular?";
-    public final String SCORE_LABEL = "score:";
-    public final String QUESTION_NUMBER_LABEL = "#:";
+    public final String SCORE_LABEL = "";
+    public final String QUESTION_NUMBER_LABEL = "#";
 
     private AnswerQuestionState state = new AnswerQuestionState();
 
