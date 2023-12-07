@@ -14,11 +14,13 @@ import java.awt.event.MouseListener;
 
 public class MenuItemJLabel extends JLabel implements MouseListener {
 
+    public final JLabel button;
     public final JLabel label;
     private final JLabel indicator = new JLabel(">");
 
     public MenuItemJLabel(String name, int width) {
         label = new JLabel(name, SwingConstants.CENTER);
+        button = label;
         label.setVerticalAlignment(SwingConstants.CENTER);
         this.setLayout(null);
         this.add(label);
@@ -32,13 +34,13 @@ public class MenuItemJLabel extends JLabel implements MouseListener {
         label.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         label.addMouseListener(this);
         indicator.setVisible(false);
-
     }
 
     public MenuItemJLabel(String name, ImageIcon icon, int width, int height) {
         label = new JLabel(name, SwingConstants.CENTER);
         label.setVerticalAlignment(SwingConstants.TOP);
         JLabel image = new JLabel("");
+        button = image;
         image.setIcon(icon);
         image.addMouseListener(this);
         this.setLayout(null);
