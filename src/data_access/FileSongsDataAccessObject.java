@@ -21,6 +21,10 @@ public class FileSongsDataAccessObject implements TakeQuizDataAccessInterface {
         this.csvFile = new File(csvPath);
         this.songList = new ArrayList<>();
         this.songFactory = songFactory;
+    }
+
+    // populates the database using the songs ids
+    public void init() {
 
         try (BufferedReader reader = new BufferedReader(new FileReader(csvFile))) {
             String row;
