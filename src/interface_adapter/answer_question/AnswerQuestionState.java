@@ -16,6 +16,7 @@ public class AnswerQuestionState {
     private String albumName2 = "";
     private BufferedImage coverImage1 = null;
     private BufferedImage coverImage2 = null;
+    private QuizTaker quizTaker;
 
     public AnswerQuestionState() {}
 
@@ -31,7 +32,7 @@ public class AnswerQuestionState {
         this.setArtistName2(quiz.getCurrentQuestion().getSong2().getArtists().get(0));
         this.setCoverImage1(quiz.getCurrentQuestion().getSong1().getAlbum().getCoverImages().get(0));
         this.setCoverImage2(quiz.getCurrentQuestion().getSong2().getAlbum().getCoverImages().get(0));
-
+        this.quizTaker = quiz;
     }
 
     public String getQuestionNumber() {
@@ -112,5 +113,9 @@ public class AnswerQuestionState {
 
     public void setCoverImage2(BufferedImage coverImage2) {
         this.coverImage2 = coverImage2;
+    }
+
+    public QuizTaker getQuizTaker() {
+        return quizTaker;
     }
 }
