@@ -30,6 +30,7 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
     private final int NUM_BUTTONS_WIDTH = 100;
 
     MenuItemJLabel startQuizButton = new MenuItemJLabel("start quiz", startQuizIcon, MENU_ITEM_WIDTH, MENU_ITEM_HEIGHT);
+    //MenuItemJLabel startQuizButton = new MenuItemJLabel("start quiz", 400);
     MenuItemJLabel exitButton = new MenuItemJLabel("exit", 200);
     MenuItemJLabel numButton1 = new MenuItemJLabel("5", 100);
     MenuItemJLabel numButton2 = new MenuItemJLabel("10", 100);
@@ -38,7 +39,7 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
     private int numQuestions = 5;
 
     // TODO: make constructor with controller and viewModel argument
-    public MainMenuView(TakeQuizController takeQuizController) {
+    public MainMenuView(TakeQuizController controller) {
         this.setLayout(null);
         backgroundLabel.setBounds(0,0,1920,1080);
         this.add(backgroundLabel);
@@ -68,11 +69,11 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
         numButton1.setLocation(NUM_BUTTONS_START, BUTTONS_CENTRE - 25);
         numButton1.setEnabled(false);
 
-        startQuizButton.label.addMouseListener(
+        startQuizButton.button.addMouseListener(
                 new MouseListener() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
-                        takeQuizController.execute(numQuestions);
+                        controller.execute(numQuestions);
                     }
 
                     @Override
@@ -97,7 +98,7 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
                 }
         );
 
-        numButton1.label.addMouseListener(
+        numButton1.button.addMouseListener(
                 new MouseListener() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
@@ -132,7 +133,7 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
                 }
         );
 
-        numButton2.label.addMouseListener(
+        numButton2.button.addMouseListener(
                 new MouseListener() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
@@ -167,7 +168,7 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
                 }
         );
 
-        numButton3.label.addMouseListener(
+        numButton3.button.addMouseListener(
                 new MouseListener() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
@@ -202,7 +203,7 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
                 }
         );
 
-        exitButton.label.addMouseListener(
+        exitButton.button.addMouseListener(
                 new MouseListener() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
